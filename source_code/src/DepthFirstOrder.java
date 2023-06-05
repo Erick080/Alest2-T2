@@ -50,6 +50,7 @@
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+import java.util.Queue;
 
 public class DepthFirstOrder {
     private boolean[] marked;                // marked[v] = has v been marked in dfs?
@@ -70,8 +71,6 @@ public class DepthFirstOrder {
         pre    = new int[G.V()];
         post   = new int[G.V()];
         reversePost = new int[G.V()];
-        postorder = new Queue<Integer>();
-        preorder  = new Queue<Integer>();
         reversePostorder = new Stack<Integer>();
         marked    = new boolean[G.V()];
         for (int v = 0; v < G.V(); v++)
@@ -99,13 +98,13 @@ public class DepthFirstOrder {
     private void dfs(Digraph G, int v) {
         marked[v] = true;
         pre[v] = preCounter++;
-        preorder.enqueue(v);
+        preorder.add(v);
         for (int w : G.adj(v)) {
             if (!marked[w]) {
                 dfs(G, w);
             }
         }
-        postorder.enqueue(v);
+        postorder.add(v);
         reversePostorder.push(v);
         post[v] = postCounter++;
     }
