@@ -3,34 +3,47 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
-import Casos_de_Teste.*;
+//import Casos_de_Teste.*;
 
 public class principal {
-  public static void main() {
+  public static void main(String args[]) {
+    long startTime, endTime;
+    File arquivo;
+    int size, index, i;
+    String sizes[];
+    Scanner scanner;
+
     try {
-      long startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
-
-      File arquivo = new File("CasosDeTeste/caso_1000_100000.txt");
-      Scanner scanner = new Scanner(arquivo);
-      String qtdRodadas = scanner.nextLine().split(" ")[1]; //numero de rodadas
-      int rodadas = Integer.parseInt(qtdRodadas);
-      int index = 0;  //itera pela lista de macacos
+      startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
       
-      while (scanner.hasNextLine()) { 
-        String[] data = scanner.nextLine().split(" ");
+      arquivo = new File("Casos_De_Teste/case0.map");
+      scanner = new Scanner(arquivo);
 
-        for(int i = 11;i<data.length;i++) {
+      // size[0] = altura, sizep[1] = largura
+      sizes = scanner.nextLine().split("");
+      size = Integer.parseInt(sizes[0]);
+      size *= Integer.parseInt(sizes[1]);
+
+      index = 0;
+      while (scanner.hasNextLine()) { 
+        String[] data = scanner.nextLine().split("");
+        for(i=0; i < data.length; i++) {
+          //if(data[i].equals("."))
+            System.out.printf(data[i]);
         }
+        System.out.println("\n");
         index++;
       }
       scanner.close();
       
-      long endTime = System.currentTimeMillis();
+      endTime = System.currentTimeMillis();
       System.out.println("Tempo de execucao -  " + (endTime - startTime) + " millisegundos");
     }
     catch(FileNotFoundException e) {
       System.out.println("Aconteceu um erro");
       e.printStackTrace();
     }
+    
+    System.out.println("Hello World");
   }
 }
