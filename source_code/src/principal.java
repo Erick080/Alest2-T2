@@ -10,7 +10,7 @@ public class principal {
   public static void main(String args[]) {
     long startTime, endTime;
     File arquivo;
-    int size, index, i, harbors[];
+    int size, index, i, harbors[],harbor_number;
     String sizes[], data[], data2[];
     Scanner scanner;
     Graph graph;
@@ -18,7 +18,7 @@ public class principal {
     try {
       startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
       
-      arquivo = new File("./Casos_De_Teste/case0.map");
+      arquivo = new File("./Casos_de_Teste/case0.map");
       scanner = new Scanner(arquivo);
 
       // sizes[0] = altura, sizes[1] = largura
@@ -33,13 +33,13 @@ public class principal {
       index = -1;
       data2 = scanner.nextLine().split("");
       while (scanner.hasNextLine()) { 
-        data = data2;
-        data2 = scanner.nextLine().split("");
+        data = data2; //data percorre linha de cima
+        data2 = scanner.nextLine().split(""); //data2 percorre linha de baixo
 
         for(i=0; i < 50; i++) {
-          index++;
+          index++; //index = posicao do caractere na linha de cima
           if(!data[i].equals("*")) {
-            if(!data[i].equals(".")) {
+            if(!data[i].equals(".")) { //caso seja um porto,adiciona sua posicao na lista de portos
               size = Integer.parseInt(data[i]);
               harbors[size-1] = index;
             }
@@ -48,10 +48,10 @@ public class principal {
                 graph.addEdge(index, 50+index);
               continue;
             }
-            if(!data2[i].equals("*")) {
+            if(!data2[i].equals("*")) { //verifica char embaixo
               graph.addEdge(index, 50+index);
             }
-            if(!data[i+1].equals("*")) {
+            if(!data[i+1].equals("*")) { //verifica char na direita
               graph.addEdge(index, index+1);
             }
           }
@@ -61,11 +61,11 @@ public class principal {
       data = data2;
       for(i=0; i < 50; i++) {
         if(!data[i].equals("*")) {
-          if(!data[i].equals(".")) {
-            size = Integer.parseInt(data[i]);
-            harbors[size-1] = index+1;
+          if(!data[i].equals(".")) { //se for porto, adiciona posicao na lista
+            harbor_number = Integer.parseInt(data[i]);
+            harbors[harbor_number-1] = index+1;
           }
-          if(i < 49 && !data[i+1].equals("*")) {
+          if(i < 49 && !data[i+1].equals("*")) { //verifica char na direita
             graph.addEdge(index, index+1);
           }
         }
