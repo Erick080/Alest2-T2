@@ -1,3 +1,5 @@
+package src;
+
 /******************************************************************************
  *  Compilation:  javac DepthFirstOrder.java
  *  Execution:    java DepthFirstOrder digraph.txt

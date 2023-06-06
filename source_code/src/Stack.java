@@ -1,3 +1,4 @@
+package src;
 /******************************************************************************
  *  Compilation:  javac Stack.java
  *  Execution:    java Stack < input.txt

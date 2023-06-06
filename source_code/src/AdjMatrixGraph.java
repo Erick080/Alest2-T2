@@ -1,3 +1,4 @@
+package src;
 /******************************************************************************
  *  Compilation:  javac AdjMatrixGraph.java
  *  Execution:    java AdjMatrixGraph V E
