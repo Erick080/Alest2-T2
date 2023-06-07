@@ -32,10 +32,10 @@ public class principal {
 
       index = -1;
       data2 = scanner.nextLine().split("");
+      data = data2; //data percorre linha de cima
+      data2 = scanner.nextLine().split(""); //data2 percorre linha de baixo
+      
       while (scanner.hasNextLine()) { 
-        data = data2; //data percorre linha de cima
-        data2 = scanner.nextLine().split(""); //data2 percorre linha de baixo
-
         for(i=0; i < 50; i++) {
           index++; //index = posicao do caractere na linha de cima
           if(!data[i].equals("*")) {
@@ -49,29 +49,27 @@ public class principal {
               continue;
             }
             if(!data2[i].equals("*")) { //verifica char embaixo
-              graph.addEdge(index, 50+index);
+              if(!data2[i].equals(".")) { //se for porto, adiciona posicao na lista
+                harbor_number = Integer.parseInt(data2[i]);
+                harbors[harbor_number-1] = index+1;
+              }else{ //caso contrario so adiciona edge
+                graph.addEdge(index, 50+index);
+                if(i < 49 && !data2[i+1].equals("*")) { //verifica char na direita dele
+                  graph.addEdge(index, index+1);
+                }}
+              
             }
             if(!data[i+1].equals("*")) { //verifica char na direita
               graph.addEdge(index, index+1);
             }
+            
           }
+          }
+          data = data2; //data percorre linha de cima
+          data2 = scanner.nextLine().split(""); //data2 percorre linha de baixo
+          
         }
-      }
-
-      data = data2;
-      for(i=0; i < 50; i++) {
-        if(!data[i].equals("*")) {
-          if(!data[i].equals(".")) { //se for porto, adiciona posicao na lista
-            harbor_number = Integer.parseInt(data[i]);
-            harbors[harbor_number-1] = index+1;
-          }
-          if(i < 49 && !data[i+1].equals("*")) { //verifica char na direita
-            graph.addEdge(index, index+1);
-          }
-        }
-        index++;
-      }
-      scanner.close();
+        scanner.close();
       String resultado = graph.toDot();
       PrintWriter out = new PrintWriter("dot.txt");
       out.write(resultado);
@@ -80,10 +78,12 @@ public class principal {
         System.out.println(harbors[i]);
       endTime = System.currentTimeMillis();
       System.out.println("Tempo de execucao -  " + (endTime - startTime) + " millisegundos");
-    }
-    catch(FileNotFoundException e) {
-      System.out.println("Aconteceu um erro");
-      e.printStackTrace();
-    }
+      }
+      catch(FileNotFoundException e) {
+        System.out.println("Aconteceu um erro");
+        e.printStackTrace();
+      }
+
+      
   }
 }
