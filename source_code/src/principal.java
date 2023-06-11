@@ -2,18 +2,17 @@ package src;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-//import java.util.HashMap;
 import java.util.Scanner;
 //import Casos_de_Teste.*;
 
 public class principal {
+  public static Graph graph;
   public static void main(String args[]) {
     long startTime, endTime;
     File arquivo;
-    int size, index, i, harbors[];
-    String sizes[], data[], data2[];
+    int height, width, index, i, harbors[], harbor;
+    String str_sizes[], data[], data2[];
     Scanner scanner;
-    Graph graph;
 
     try {
       startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
@@ -21,35 +20,36 @@ public class principal {
       arquivo = new File("./Casos_De_Teste/case0.map");
       scanner = new Scanner(arquivo);
 
-      // sizes[0] = altura, sizes[1] = largura
-      sizes = scanner.nextLine().split(" ");
-      size = Integer.parseInt(sizes[0]);
-      size *= Integer.parseInt(sizes[1]);
+      // size[0] = altura, size[1] = largura
+      str_sizes = scanner.nextLine().split(" ");
+      height = Integer.parseInt(str_sizes[0]);
+      width = Integer.parseInt(str_sizes[1]);
 
       harbors = new int[9];
 
-      graph = new Graph(size);
+      graph = new Graph(height * width);
 
       index = -1;
       data2 = scanner.nextLine().split("");
+
       while (scanner.hasNextLine()) { 
         data = data2;
         data2 = scanner.nextLine().split("");
 
-        for(i=0; i < 50; i++) {
+        for(i=0; i < width; i++) {
           index++;
           if(!data[i].equals("*")) {
             if(!data[i].equals(".")) {
-              size = Integer.parseInt(data[i]);
-              harbors[size-1] = index;
+              harbor = Integer.parseInt(data[i]);
+              harbors[harbor-1] = index;
             }
-            if(i == 49) {
+            if(i == width-1) {
               if(!data2[i].equals("*"))
-                graph.addEdge(index, 50+index);
+                graph.addEdge(index, width+index);
               continue;
             }
             if(!data2[i].equals("*")) {
-              graph.addEdge(index, 50+index);
+              graph.addEdge(index, width+index);
             }
             if(!data[i+1].equals("*")) {
               graph.addEdge(index, index+1);
@@ -57,27 +57,31 @@ public class principal {
           }
         }
       }
-
+      //le a ultima linha
       data = data2;
-      for(i=0; i < 50; i++) {
+      for(i=0; i < width; i++) {
         if(!data[i].equals("*")) {
           if(!data[i].equals(".")) {
-            size = Integer.parseInt(data[i]);
-            harbors[size-1] = index+1;
+            harbor = Integer.parseInt(data[i]);
+            harbors[harbor-1] = index+1;
           }
-          if(i < 49 && !data[i+1].equals("*")) {
+          if(i < width-1 && !data[i+1].equals("*")) {
             graph.addEdge(index, index+1);
           }
         }
         index++;
       }
       scanner.close();
+      //acaba de escanear o grafo
+      CaminhamentoLargura caminho = new CaminhamentoLargura(graph, harbors);
+
+
       String resultado = graph.toDot();
       PrintWriter out = new PrintWriter("dot.txt");
       out.write(resultado);
       out.close();
-      for(i=0;i<harbors.length;i++)
-        System.out.println(harbors[i]);
+      //for(i=0;i<harbors.length;i++)
+        //System.out.println(harbors[i]);
       endTime = System.currentTimeMillis();
       System.out.println("Tempo de execucao -  " + (endTime - startTime) + " millisegundos");
     }
