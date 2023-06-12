@@ -1,16 +1,14 @@
 package src;
 
-//import java.util.Queue;
 import java.util.ArrayList;
 
 public class CaminhamentoLargura {
     private boolean marked[];
     private int edgeTo[], distTo[], distHarbor[];
-    private int ref, harbor;
+    private int harbor;
     private Graph g;
 
     public CaminhamentoLargura(Graph graph, int[] s){
-        this.ref = s[0];
         this.g = graph;
         marked = new boolean[g.V()];
         edgeTo = new int [g.V()];
@@ -28,24 +26,6 @@ public class CaminhamentoLargura {
                 }
             harbor++;
         }
-        int total = 0;
-        System.out.println("\t CAMINHO ENTRE PORTOS");
-        System.out.println("\t-----------------------");
-        for(int i = 0, j = 1, k = 2; i < harbor; i++, j++, k++){
-            if(distHarbor[i] != -1) {
-                total += distHarbor[i];
-                if(i == 8) { 
-                    k = 1;
-                }
-                System.out.printf("\t   Porto %d ao %d: %d\n",
-                                j, k, distHarbor[i]);
-                j = k-1;
-            }    
-            else {
-                j--;
-            }
-        }
-        System.out.println("\tTotal de combustivel: " + total);
     }
         
     private boolean bfs(int s, int d){
@@ -72,9 +52,29 @@ public class CaminhamentoLargura {
             }
         }
         distHarbor[harbor] = -1;
-        //harbor++;
         //System.out.println("nao achou");
         return false;
+    }
+
+    public void print() {
+        int total = 0;
+        System.out.println("\t CAMINHO ENTRE PORTOS");
+        System.out.println("\t-----------------------");
+        for(int i = 0, j = 1, k = 2; i < harbor; i++, j++, k++){
+            if(distHarbor[i] != -1) {
+                total += distHarbor[i];
+                if(i == 8) { 
+                    k = 1;
+                }
+                System.out.printf("\t   Porto %d ao %d: %d\n",
+                                j, k, distHarbor[i]);
+                j = k-1;
+            }    
+            else {
+                j--;
+            }
+        }
+        System.out.println("\tTotal de combustivel: " + total);
     }
 
     public boolean hasPath(int v){
@@ -83,7 +83,7 @@ public class CaminhamentoLargura {
 
     public Iterable<Integer> pathTo(int v){
         if(!hasPath(v)){return null;}
-        Bag<Integer> b  = new Bag();
+        Bag<Integer> b  = new Bag<>();
         b.add(v);
         int aux = edgeTo[v];
         while(aux != -1){

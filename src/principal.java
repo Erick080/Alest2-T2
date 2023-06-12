@@ -8,7 +8,7 @@ public class principal {
   public static Graph graph;
   public static void main(String args[]) {
     long startTime, endTime;
-    File arquivo;
+    File file;
     int height, width, index, i, harbors[], harbor;
     String str_sizes[], data[], data2[];
     Scanner scanner;
@@ -16,8 +16,8 @@ public class principal {
     try {
       startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
       
-      arquivo = new File("./Casos_de_Teste/case0.map");
-      scanner = new Scanner(arquivo);
+      file = new File("./Casos_de_Teste/case0.map");
+      scanner = new Scanner(file);
 
       // size[0] = altura, size[1] = largura
       str_sizes = scanner.nextLine().split(" ");
@@ -74,6 +74,7 @@ public class principal {
       //acaba de escanear o grafo
 
       CaminhamentoLargura caminho = new CaminhamentoLargura(graph, harbors);
+      caminho.print();
 
       endTime = System.currentTimeMillis();
       System.out.println("Tempo de execucao -  " + (endTime - startTime) + " millisegundos");
