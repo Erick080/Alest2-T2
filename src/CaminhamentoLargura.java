@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CaminhamentoLargura {
     private boolean marked[];
     private int edgeTo[], distTo[], distHarbor[];
-    private int harbor;
+    private int harbor, last;
     private Graph g;
 
     public CaminhamentoLargura(Graph graph, int[] s){
@@ -15,15 +15,20 @@ public class CaminhamentoLargura {
         distTo = new int [g.V()];
         distHarbor = new int[s.length];
         distTo[s[0]] = 0;
+        last = 0;
         for(int i = 0; i < s.length; i++) {
             if(i == s.length-1) {
-                bfs(s[s.length-1], s[0]);
+                bfs(s[last], s[0]);
             }
-            else 
-                if(!bfs(s[i], s[i+1]) && i < s.length-2) {
-                    harbor++;
-                    bfs(s[i], s[(i+=1) +1]);
+            else if(bfs(s[i], s[i+1])) {
+                last++;
+            }
+            else if(i < s.length-2) {
+                harbor++;
+                if(bfs(s[i], s[(i+=1) +1])) {
+                    last++;
                 }
+            }
             harbor++;
         }
     }

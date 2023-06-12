@@ -37,7 +37,7 @@ package src;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@SuppressWarnings("unchecked")
 /**
  *  The {@code Graph} class represents an undirected graph of vertices
  *  named 0 through <em>V</em> – 1.
