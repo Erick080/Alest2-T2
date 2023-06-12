@@ -28,10 +28,12 @@ public class CaminhamentoLargura {
                 }
             harbor++;
         }
+        int total = 0;
         System.out.println("\t CAMINHO ENTRE PORTOS");
         System.out.println("\t-----------------------");
         for(int i = 0, j = 1, k = 2; i < harbor; i++, j++, k++){
             if(distHarbor[i] != -1) {
+                total += distHarbor[i];
                 if(i == 8) { 
                     k = 1;
                 }
@@ -43,6 +45,7 @@ public class CaminhamentoLargura {
                 j--;
             }
         }
+        System.out.println("\tTotal de combustivel: " + total);
     }
         
     private boolean bfs(int s, int d){

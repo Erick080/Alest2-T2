@@ -17,7 +17,7 @@ public class principal {
     try {
       startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
       
-      arquivo = new File("./Casos_De_Teste/case0.map");
+      arquivo = new File("./Casos_de_Teste/case0.map");
       scanner = new Scanner(arquivo);
 
       // size[0] = altura, size[1] = largura
