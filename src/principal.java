@@ -1,7 +1,6 @@
 package src;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 //import Casos_de_Teste.*;
 
@@ -17,7 +16,7 @@ public class principal {
     try {
       startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
       
-      arquivo = new File("./Casos_de_Teste/case5.map");
+      arquivo = new File("./Casos_de_Teste/case0.map");
       scanner = new Scanner(arquivo);
 
       // size[0] = altura, size[1] = largura
@@ -75,7 +74,6 @@ public class principal {
       //acaba de escanear o grafo
 
       CaminhamentoLargura caminho = new CaminhamentoLargura(graph, harbors);
-      //System.out.println(caminho.pathTo(harbors[1]));
 
       endTime = System.currentTimeMillis();
       System.out.println("Tempo de execucao -  " + (endTime - startTime) + " millisegundos");
