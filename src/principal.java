@@ -2,7 +2,6 @@ package src;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-//import Casos_de_Teste.*;
 
 public class principal {
   public static Graph graph;
@@ -12,11 +11,12 @@ public class principal {
     int height, width, index, i, harbors[], harbor;
     String str_sizes[], data[], data2[];
     Scanner scanner;
+    CaminhamentoLargura caminho;
 
     try {
       startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
       
-      file = new File("./Casos_de_Teste/case0.map");
+      file = new File("./Casos_de_Teste/case4.map");
       scanner = new Scanner(file);
 
       // size[0] = altura, size[1] = largura
@@ -73,7 +73,7 @@ public class principal {
       scanner.close();
       //acaba de escanear o grafo
 
-      CaminhamentoLargura caminho = new CaminhamentoLargura(graph, harbors);
+      caminho = new CaminhamentoLargura(graph, harbors);
       caminho.print();
 
       endTime = System.currentTimeMillis();

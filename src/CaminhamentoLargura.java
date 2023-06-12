@@ -20,14 +20,8 @@ public class CaminhamentoLargura {
             if(i == s.length-1) {
                 bfs(s[last], s[0]);
             }
-            else if(bfs(s[i], s[i+1])) {
+            else if(bfs(s[last], s[i+1])) {
                 last = i+1;
-            }
-            else if(i < s.length-2) {
-                harbor++;
-                if(bfs(s[i], s[(i+=1) +1])) {
-                    last = i+1;
-                }
             }
             harbor++;
         }
