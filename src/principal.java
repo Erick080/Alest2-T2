@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class principal {
-  public static Graph graph;
   public static void main(String args[]) {
     long startTime, endTime;
     File file;
@@ -12,11 +11,12 @@ public class principal {
     String str_sizes[], data[], data2[];
     Scanner scanner;
     CaminhamentoLargura caminho;
+    Graph graph;
 
     try {
       startTime = System.currentTimeMillis(); //metodo para cronometrar tempo de execucao
       
-      file = new File("./Casos_de_Teste/case4.map");
+      file = new File("./Casos_de_Teste/case5.map");
       scanner = new Scanner(file);
 
       // size[0] = altura, size[1] = largura
